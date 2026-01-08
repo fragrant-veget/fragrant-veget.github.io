@@ -46,7 +46,187 @@
   
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start --><style>/* CSS for Hexo Butterfly Updates Heatmap */
+.updates-heatmap {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--card-bg, #fff);
+  border-radius: 8px;
+  box-shadow: var(--card-box-shadow, 0 3px 8px 6px rgba(7, 17, 27, 0.05));
+  width: 100%;
+  overflow: hidden;
+  color: var(--font-color, #333);
+}
+
+[data-theme='dark'] .updates-heatmap {
+  background: var(--card-bg, #1d1d1f);
+  color: var(--font-color, #F7F7FA);
+}
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.heatmap-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  outline: none;
+  border-bottom: 1px dashed transparent;
+}
+
+.heatmap-title:focus {
+  border-bottom: 1px dashed #999;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--font-color, #888);
+  gap: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legend-label {
+  color: var(--font-color, #888);
+  margin: 0 4px;
+}
+
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.heatmap-months {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.heatmap-month-label {
+  font-size: 12px;
+  color: var(--font-color, #888);
+  grid-column: span 1;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.heatmap-day {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background-color: #ebedf0;
+}
+
+[data-theme='dark'] .heatmap-day {
+  background-color: #2d333b;
+}
+
+.legend-color.level-0 { background-color: #ebedf0; }
+[data-theme='dark'] .legend-color.level-0 { background-color: #2d333b; }
+
+/* Green Theme */
+.theme-green .level-1 { background-color: #9be9a8; }
+.theme-green .level-2 { background-color: #40c463; }
+.theme-green .level-3 { background-color: #30a14e; }
+.theme-green .level-4 { background-color: #216e39; }
+
+/* Blue Theme */
+.theme-blue .level-1 { background-color: #a8d1ff; }
+.theme-blue .level-2 { background-color: #63a7ff; }
+.theme-blue .level-3 { background-color: #3079e0; }
+.theme-blue .level-4 { background-color: #1a56ad; }
+
+/* Pink Theme */
+.theme-pink .level-1 { background-color: #ffc9c9; }
+.theme-pink .level-2 { background-color: #ff8585; }
+.theme-pink .level-3 { background-color: #e04545; }
+.theme-pink .level-4 { background-color: #ad1a1a; }
+
+/* Red Theme */
+.theme-red .level-1 { background-color: #ffdce0; }
+.theme-red .level-2 { background-color: #ff9b9b; }
+.theme-red .level-3 { background-color: #ff4b4b; }
+.theme-red .level-4 { background-color: #c91a1a; }
+
+/* Orange Theme */
+.theme-orange .level-1 { background-color: #ffe8cc; }
+.theme-orange .level-2 { background-color: #ffb366; }
+.theme-orange .level-3 { background-color: #ff8c1a; }
+.theme-orange .level-4 { background-color: #cc6600; }
+
+/* Purple Theme */
+.theme-purple .level-1 { background-color: #e6ccff; }
+.theme-purple .level-2 { background-color: #b366ff; }
+.theme-purple .level-3 { background-color: #8c1aff; }
+.theme-purple .level-4 { background-color: #6600cc; }
+
+.updates-show-more-btn {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 0;
+  background: var(--card-bg, #fff);
+  color: #49b1f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 100%;
+  transition: all 0.3s;
+  user-select: none;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  font-size: 1.1em;
+}
+
+[data-theme='dark'] .updates-show-more-btn {
+  background: var(--card-bg, #1d1d1f);
+  color: #49b1f5;
+  border: 1px solid #3d3d3d;
+}
+
+.updates-show-more-btn:hover {
+  background: #f0f0f0;
+  color: #FF7242;
+}
+
+[data-theme='dark'] .updates-show-more-btn:hover {
+  background: #3d3d3d;
+}
+
+.year-label {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: var(--font-color, #999);
+}
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   
@@ -245,5 +425,15 @@
 
   </div>
   <script src="/js/light-dark-switch.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start --><script>window.toggleHistory = function(btn) {
+  var history = document.getElementById('updates-history');
+  if (history.style.display === 'none') {
+    history.style.display = 'block';
+    btn.innerText = '收起';
+  } else {
+    history.style.display = 'none';
+    btn.innerText = '显示更多';
+  }
+}
+</script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
