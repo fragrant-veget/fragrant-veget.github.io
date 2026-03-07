@@ -1,0 +1,531 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>fragrant-veget的博客</title><meta name="author" content="fragrant veget."><meta name="copyright" content="fragrant veget."><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在这记录下我的学习足迹">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fragrant-veget的博客">
+<meta property="og:url" content="https://fragrant-veget.github.io/page/2/index.html">
+<meta property="og:site_name" content="fragrant-veget的博客">
+<meta property="og:description" content="在这记录下我的学习足迹">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fragrant-veget.github.io/avatar.jpg">
+<meta property="article:author" content="fragrant veget.">
+<meta property="article:tag" content="取证，ctf，日常">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fragrant-veget.github.io/avatar.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://fragrant-veget.github.io/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'fragrant-veget的博客',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><!-- hexo injector head_end start --><style>/* CSS for Hexo Butterfly Updates Heatmap */
+.updates-heatmap {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--card-bg, #fff);
+  border-radius: 8px;
+  box-shadow: var(--card-box-shadow, 0 3px 8px 6px rgba(7, 17, 27, 0.05));
+  width: 100%;
+  overflow: hidden;
+  color: var(--font-color, #333);
+}
+
+[data-theme='dark'] .updates-heatmap {
+  background: var(--card-bg, #1d1d1f);
+  color: var(--font-color, #F7F7FA);
+}
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.heatmap-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  outline: none;
+  border-bottom: 1px dashed transparent;
+}
+
+.heatmap-title:focus {
+  border-bottom: 1px dashed #999;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--font-color, #888);
+  gap: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legend-label {
+  color: var(--font-color, #888);
+  margin: 0 4px;
+}
+
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.heatmap-months {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.heatmap-month-label {
+  font-size: 12px;
+  color: var(--font-color, #888);
+  grid-column: span 1;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(53, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.heatmap-day {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background-color: #ebedf0;
+}
+
+[data-theme='dark'] .heatmap-day {
+  background-color: #2d333b;
+}
+
+.legend-color.level-0 { background-color: #ebedf0; }
+[data-theme='dark'] .legend-color.level-0 { background-color: #2d333b; }
+
+/* Green Theme */
+.theme-green .level-1 { background-color: #9be9a8; }
+.theme-green .level-2 { background-color: #40c463; }
+.theme-green .level-3 { background-color: #30a14e; }
+.theme-green .level-4 { background-color: #216e39; }
+
+/* Blue Theme */
+.theme-blue .level-1 { background-color: #a8d1ff; }
+.theme-blue .level-2 { background-color: #63a7ff; }
+.theme-blue .level-3 { background-color: #3079e0; }
+.theme-blue .level-4 { background-color: #1a56ad; }
+
+/* Pink Theme */
+.theme-pink .level-1 { background-color: #ffc9c9; }
+.theme-pink .level-2 { background-color: #ff8585; }
+.theme-pink .level-3 { background-color: #e04545; }
+.theme-pink .level-4 { background-color: #ad1a1a; }
+
+/* Red Theme */
+.theme-red .level-1 { background-color: #ffdce0; }
+.theme-red .level-2 { background-color: #ff9b9b; }
+.theme-red .level-3 { background-color: #ff4b4b; }
+.theme-red .level-4 { background-color: #c91a1a; }
+
+/* Orange Theme */
+.theme-orange .level-1 { background-color: #ffe8cc; }
+.theme-orange .level-2 { background-color: #ffb366; }
+.theme-orange .level-3 { background-color: #ff8c1a; }
+.theme-orange .level-4 { background-color: #cc6600; }
+
+/* Purple Theme */
+.theme-purple .level-1 { background-color: #e6ccff; }
+.theme-purple .level-2 { background-color: #b366ff; }
+.theme-purple .level-3 { background-color: #8c1aff; }
+.theme-purple .level-4 { background-color: #6600cc; }
+
+.updates-show-more-btn {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 0;
+  background: var(--card-bg, #fff);
+  color: #49b1f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  width: 100%;
+  transition: all 0.3s;
+  user-select: none;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  font-size: 1.1em;
+}
+
+[data-theme='dark'] .updates-show-more-btn {
+  background: var(--card-bg, #1d1d1f);
+  color: #49b1f5;
+  border: 1px solid #3d3d3d;
+}
+
+.updates-show-more-btn:hover {
+  background: #f0f0f0;
+  color: #FF7242;
+}
+
+[data-theme='dark'] .updates-show-more-btn:hover {
+  background: #3d3d3d;
+}
+
+.year-label {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: var(--font-color, #999);
+}
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><i class="fa-fw fas fa-achieves"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about"><i class="fa-fw fas fa-about"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/banner1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/avatar.jpg" alt="Logo"><span class="site-name">fragrant-veget的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><i class="fa-fw fas fa-achieves"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about"><i class="fa-fw fas fa-about"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">fragrant-veget的博客</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/01/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95/" title="矩阵的乘法">矩阵的乘法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-01-12T10:13:23.000Z" title="Created 2026-01-12 18:13:23">2026-01-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/">矩阵</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a class="twikoo-count" href="/2026/01/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95/#post-comment"><i class="fa-solid fa-spinner fa-spin"></i></a><span class="article-meta-label"> comments</span></span></div><div class="content">矩阵的乘法定义两个矩阵能相乘的前提条件： 第一个矩阵的列数等于第二个矩阵的行数（中间相等） 乘积矩阵AB的行数等于左边矩阵A的行数 乘积矩阵AB的列数等于右边矩阵B的列数，即 Amn ，Bns ，则AB为m$ \times $s矩阵（取两头） 例题例1 设矩阵A&#x3D;$ \begin{pmatrix} -1 &amp; 1 &amp; 2 \\ 3 &amp; 0 &amp; 1 \end{pmatrix} $，B&#x3D;$ \begin{pmatrix} 1 &amp; 2 \\ 0 &amp; 3 \\ -1 &amp; 1 \end{pmatrix} $，求AB,BA AB&#x3D;$ \begin{pmatrix} -3 &amp; 3 \\ 2 &amp; -7 \end{pmatrix} $ BA&#x3D;$ \begin{pmatrix} 5 &amp; 1 &amp; 4 \\ 9 &amp; 0 &amp; 3 \\ 4 &amp; -1 &amp; -1 \end{pmatrix} $ 矩阵的数乘不满足交换律 例2 设A&#x3D; $ \beg...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/01/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8A%A0%E6%B3%95%E3%80%81%E5%87%8F%E6%B3%95%E3%80%81%E6%95%B0%E4%B9%98/" title="矩阵的加法、减法、数乘">矩阵的加法、减法、数乘</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-01-12T07:50:45.285Z" title="Created 2026-01-12 15:50:45">2026-01-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/">矩阵</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a class="twikoo-count" href="/2026/01/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8A%A0%E6%B3%95%E3%80%81%E5%87%8F%E6%B3%95%E3%80%81%E6%95%B0%E4%B9%98/#post-comment"><i class="fa-solid fa-spinner fa-spin"></i></a><span class="article-meta-label"> comments</span></span></div><div class="content">矩阵的加法两个同型的矩阵相加，就是对应位置的元素相加,即 A&#x3D;(aij)mn ,B&#x3D;(bij)mn 则 A+B&#x3D;(aij +bij)mn 矩阵的减法两个同型的矩阵相减，就是对应位置的元素相减,即 A&#x3D;(aij)mn ,B&#x3D;(bij)mn 则 A-B&#x3D;(aij -bij)mn 矩阵的加法、减法的运算规律1.A+B&#x3D;B+A（交换律） 2.(A+B)+C&#x3D;A+(B+C)（结合律） 3.A+O&#x3D;A 4.A+(-A)&#x3D;O 5.A-B&#x3D;A+(-B) 6.A+B&#x3D;C$ \leftrightarrow $A&#x3D;C-B（移项） 矩阵的数乘数k乘以矩阵A，就是用数k乘以矩阵A的每一个元素，即 A&#x3D;(aij)mn ，则kA&#x3D;(kaij )mn 矩阵和行列式提公因子的差别1.矩阵的所有元素均有公因子k，k对外提一次 2.行列式的某一行有公因式k，k对外提一次 3.行列式的所有元素均有公因子k，k对外提n次（n为行数） 矩阵的数乘的运算规律1.k(A+B)&#...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/01/12/%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E4%BA%8E%E3%80%8AWireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B0%B1%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95%E3%80%8B%E4%B8%80%E4%B9%A6%E5%AF%B9wireshark%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="基于《Wireshark网络分析就这么简单》一书对wireshark的学习">基于《Wireshark网络分析就这么简单》一书对wireshark的学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-01-12T06:19:27.000Z" title="Created 2026-01-12 14:19:27">2026-01-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a class="twikoo-count" href="/2026/01/12/%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E4%BA%8E%E3%80%8AWireshark%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E5%B0%B1%E8%BF%99%E4%B9%88%E7%AE%80%E5%8D%95%E3%80%8B%E4%B8%80%E4%B9%A6%E5%AF%B9wireshark%E7%9A%84%E5%AD%A6%E4%B9%A0/#post-comment"><i class="fa-solid fa-spinner fa-spin"></i></a><span class="article-meta-label"> comments</span></span></div><div class="content">Life is tough,but Wireshark makes it easy  创作指数LessMoreJanFebMarAprMayJunJulAugSepOctNovDec2026显示更多博客还没有满1月呢～～  Wireshark网络分析就这么简单.(z-lib.org).pdf 第一章：初试锋芒Wireshark抓包这里因为没有相同的电脑配置条件，所以无法模拟书上测试连接的过程，只能演示如何抓包 选择本机物理网卡   双击该网卡选项就会自动对本机进行流量抓包 Wireshark界面布局  最上面是Packet List窗口，它列出了所有网络包，在Packet List中选定的网络包会详细地显示在中间的Packet Details窗口，最底下是Packet Bytes Details窗口，我们一般不会用到它   点击红色方块按钮来停止，或者点击鲨鱼鳍按钮来继续抓包 从一道面试题开始说起问题：两台服务器A和B的网络配置如下，B的子网掩码本应该是255.255.255.0，被不小心配成了255.255.255.254，它们还能正常通信吗？ 服务器A: IP地址：192.1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/01/10/%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E4%BA%8E%E3%80%8A%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E3%80%8B%E5%AF%B9%E4%BA%8E%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="基于《密码学原理》对于密码学的学习">基于《密码学原理》对于密码学的学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-01-10T03:44:36.000Z" title="Created 2026-01-10 11:44:36">2026-01-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a class="twikoo-count" href="/2026/01/10/%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E4%BA%8E%E3%80%8A%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E3%80%8B%E5%AF%B9%E4%BA%8E%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9A%84%E5%AD%A6%E4%B9%A0/#post-comment"><i class="fa-solid fa-spinner fa-spin"></i></a><span class="article-meta-label"> comments</span></span></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/01/08/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-01-08T06:11:03.224Z" title="Created 2026-01-08 14:11:03">2026-01-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-comments"></i><a class="twikoo-count" href="/2026/01/08/hello-world/#post-comment"><i class="fa-solid fa-spinner fa-spin"></i></a><span class="article-meta-label"> comments</span></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">fragrant veget.</div><div class="author-info-description">在这记录下我的学习足迹</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fragrant-veget"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到fragrant-veget的博客~</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/07/ctf/SPC-CTF-%E7%BB%83%E7%BB%83%E6%89%8B/" title="SPC:CTF 练练手">SPC:CTF 练练手</a><time datetime="2026-03-07T10:26:43.000Z" title="Created 2026-03-07 18:26:43">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/07/%E6%95%B0%E8%AE%BA/%E6%A8%A1%E8%BF%90%E7%AE%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8/" title="模运算的基本性质">模运算的基本性质</a><time datetime="2026-03-07T08:50:11.000Z" title="Created 2026-03-07 16:50:11">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/07/%E6%95%B0%E8%AE%BA/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99%EF%BC%88Quadratic-Residue%EF%BC%89/" title="二次剩余（Quadratic Residue）">二次剩余（Quadratic Residue）</a><time datetime="2026-03-07T07:52:21.000Z" title="Created 2026-03-07 15:52:21">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/07/%E6%95%B0%E8%AE%BA/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%EF%BC%88Fermat-s-Little-Theorem%EF%BC%89/" title="费马小定理（Fermat's Little Theorem）">费马小定理（Fermat's Little Theorem）</a><time datetime="2026-03-07T07:04:20.000Z" title="Created 2026-03-07 15:04:20">2026-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/14/%E6%95%B0%E5%AD%A6/%E7%90%B4%E7%94%9F%E4%B8%8D%E7%AD%89%E5%BC%8F%EF%BC%88Jensen-s-Inequality%EF%BC%89/" title="琴生不等式（Jensen's Inequality）">琴生不等式（Jensen's Inequality）</a><time datetime="2026-02-14T03:33:58.000Z" title="Created 2026-02-14 11:33:58">2026-02-14</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>Loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/bug/"><span class="card-category-list-name">bug</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf/"><span class="card-category-list-name">ctf</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">学习</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="card-category-list-name">数学</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E8%AE%BA/"><span class="card-category-list-name">数论</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"><span class="card-category-list-name">线性代数</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/"><span class="card-category-list-name">矩阵</span><span class="card-category-list-count">2</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/matrix/" style="font-size: 1.3em; color: #99a1ac">matrix</a> <a href="/tags/letex/" style="font-size: 1.1em; color: #999">letex</a> <a href="/tags/digital-forensics/" style="font-size: 1.1em; color: #999">digital forensics</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">数学</a> <a href="/tags/crypto/" style="font-size: 1.1em; color: #999">crypto</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.5em; color: #99a9bf">数论</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              March 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              February 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              January 2026
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">15</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-03-07T10:40:36.036Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By fragrant veget.</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional and Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  const getCommentUrl = () => {
+    const eleGroup = document.querySelectorAll('#recent-posts .article-title')
+    let urlArray = []
+    eleGroup.forEach(i=>{
+      urlArray.push(i.getAttribute('href'))
+    })
+    return urlArray
+  }
+
+  const getCount = () => {
+    const runTwikoo = () => {
+      twikoo.getCommentsCount({
+        envId: 'https://twikoo-roan-nine-56.vercel.app/',
+        region: '',
+        urls: getCommentUrl(),
+        includeReply: false
+      }).then(function (res) {
+        document.querySelectorAll('#recent-posts .twikoo-count').forEach((item,index) => {
+          if (res[index]) {
+            item.textContent = res[index].count
+          }
+        })
+      }).catch(function (err) {
+        console.log(err)
+      })
+    }
+
+      if (typeof twikoo === 'object') {
+        runTwikoo()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js').then(runTwikoo)
+      }
+  }
+
+  window.pjax ? getCount() : window.addEventListener('load', getCount)
+
+})()</script></div><script>window.newestComments = {
+  changeContent: content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[Image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[Link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[Code]') // replace code
+    content = content.replace(/<code>.*?<\/code>/gi, '[Code]') // replace code
+    content = content.replace(/<[^>]+>/g, "") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0, 150) + '...'
+    }
+    return content
+  },
+
+  generateHtml: (array, ele) => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class="aside-list-item">'
+
+        if (true && array[i].avatar) {
+          const imgAttr = 'src'
+          const lazyloadNative = ''
+          result += `<a href="${array[i].url}" class="thumbnail"><img ${imgAttr}="${array[i].avatar}" alt="${array[i].nick}" ${lazyloadNative}></a>`
+        }
+
+        result += `<div class="content">
+        <a class="comment" href="${array[i].url}" title="${array[i].content}">${array[i].content}</a>
+        <div class="name"><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    ele.innerHTML = result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh(ele)
+  },
+
+  newestCommentInit: (name, getComment) => {
+    const $dom = document.querySelector('#card-newest-comments .aside-list')
+    if ($dom) {
+      const data = btf.saveToLocal.get(name)
+      if (data) {
+        newestComments.generateHtml(JSON.parse(data), $dom)
+      } else {
+        getComment($dom)
+      }
+    }
+  },
+
+  run: (name, getComment) => {
+    newestComments.newestCommentInit(name, getComment)
+    btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
+  }
+}</script><script>window.addEventListener('load', () => {
+  const keyName = 'twikoo-newest-comments'
+  const { changeContent, generateHtml, run } = window.newestComments
+
+  const getComment = ele => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo-roan-nine-56.vercel.app/',
+        region: '',
+        pageSize: 10,
+        includeReply: true
+      }).then(res => {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set(keyName, JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray, ele)
+      }).catch(err => {
+        console.error(err)
+        ele.textContent= "Unable to retrieve comments, please check the configuration"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  run(keyName, getComment)
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script>window.toggleHistory = function(btn) {
+  var history = document.getElementById('updates-history');
+  if (history.style.display === 'none') {
+    history.style.display = 'block';
+    btn.innerText = '收起';
+  } else {
+    history.style.display = 'none';
+    btn.innerText = '显示更多';
+  }
+}
+</script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
