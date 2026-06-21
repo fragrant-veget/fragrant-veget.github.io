@@ -6,8 +6,8 @@
 <meta property="og:description" content="五角场及周边高校警情数据动态可视化分析平台           :root {       --bg: #081326;       --panel: rgba(18, 35, 64, .92);       --panel-2: rgba(28, 53, 91, .86);       --text: #eaf2ff;       --muted: #9fb5d5;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://fragrant-veget.github.io/avatar.jpg">
-<meta property="article:published_time" content="2026-06-21T06:43:21.376Z">
-<meta property="article:modified_time" content="2026-06-21T06:43:21.376Z">
+<meta property="article:published_time" content="2026-06-21T08:08:01.791Z">
+<meta property="article:modified_time" content="2026-06-21T08:08:01.758Z">
 <meta property="article:author" content="fragrant veget.">
 <meta property="article:tag" content="取证，ctf，日常">
 <meta name="twitter:card" content="summary">
@@ -421,24 +421,46 @@
     .span-8 { grid-column: span 8; }
     .span-12 { grid-column: span 12; }
     .panel-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .panel-title h2 { margin: 0; font-size: 18px; }
-    .hint { color: var(--muted); font-size: 12px; }
+    .panel-title h2 { margin: 0; font-size: 18px; color: #f4f8ff; text-shadow: 0 0 12px rgba(58, 165, 255, .28); }
+    .hint { color: #c7d8f2; font-size: 12px; }
     .chart { height: 305px; }
-    .map-wrap { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; }
+    .chart-tall { height: 390px; }
+    .map-wrap { display: grid; grid-template-columns: 1.6fr .6fr; gap: 12px; }
     .map-card {
-      min-height: 305px;
+      min-height: 430px;
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: linear-gradient(135deg, rgba(14, 40, 76, .9), rgba(9, 24, 45, .85));
+      background:
+        linear-gradient(rgba(9, 24, 45, .18), rgba(9, 24, 45, .42)),
+        var(--map-bg, none),
+        linear-gradient(90deg, rgba(53, 212, 216, .16) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(53, 212, 216, .12) 1px, transparent 1px),
+        radial-gradient(circle at 48% 45%, rgba(58, 165, 255, .28), transparent 32%),
+        linear-gradient(135deg, rgba(14, 40, 76, .95), rgba(9, 24, 45, .88));
+      background-size: cover, cover, 44px 44px, 44px 44px, 100% 100%, 100% 100%;
+      background-position: center, center, center, center, center, center;
       position: relative;
       overflow: hidden;
     }
     .map-card::before {
+      content: "杨浦-五角场区域示意图";
+      position: absolute;
+      left: 18px;
+      top: 14px;
+      color: rgba(234, 242, 255, .28);
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+    .map-card::after {
       content: "";
       position: absolute;
-      inset: 22px;
-      border: 1px dashed rgba(159, 181, 213, .35);
-      border-radius: 18px;
+      left: 9%;
+      right: 8%;
+      top: 18%;
+      bottom: 16%;
+      border: 1px dashed rgba(159, 181, 213, .38);
+      border-radius: 48% 52% 42% 58%;
+      transform: rotate(-8deg);
     }
     .point {
       position: absolute;
@@ -447,7 +469,7 @@
       border-radius: 50%;
       background: var(--cyan);
       box-shadow: 0 0 0 7px rgba(53, 212, 216, .15), 0 0 18px rgba(53, 212, 216, .8);
-      transform: translate(-50%, -50%);
+      z-index: 2;
     }
     .point.low { background: #3aa5ff; box-shadow: 0 0 0 7px rgba(58, 165, 255, .16), 0 0 18px rgba(58, 165, 255, .8); }
     .point.medium { background: #ffb15c; box-shadow: 0 0 0 7px rgba(255, 177, 92, .16), 0 0 18px rgba(255, 177, 92, .8); }
@@ -498,31 +520,31 @@
     </section>
 
     <section class="grid">
-      <div class="panel span-8">
-        <div class="panel-title"><h2>月度警情变化与预测</h2><span class="hint">实际值 / 4期移动平均 / 指数平滑</span></div>
-        <div id="trendChart" class="chart"></div>
-      </div>
-      <div class="panel span-4">
-        <div class="panel-title"><h2>警情类型结构</h2><span class="hint">累计占比</span></div>
-        <div id="typeChart" class="chart"></div>
-      </div>
-      <div class="panel span-6">
-        <div class="panel-title"><h2>区域警情排名</h2><span class="hint">历史累计</span></div>
-        <div id="areaChart" class="chart"></div>
-      </div>
-      <div class="panel span-6">
-        <div class="panel-title"><h2>区域-类型热力图</h2><span class="hint">颜色越深数量越高</span></div>
-        <div id="heatmapChart" class="chart"></div>
-      </div>
-      <div class="panel span-8">
-        <div class="panel-title"><h2>五角场及周边高校风险点位示意</h2><span class="hint">非真实经纬度执法数据，仅用于课程展示</span></div>
+      <div class="panel span-12">
+        <div class="panel-title"><h2>五角场及周边高校风险点位示意</h2><span class="hint">静态地图背景 + 风险等级点位标注</span></div>
         <div class="map-wrap">
-          <div class="map-card" id="pointMap"></div>
+          <div class="map-card" id="pointMap" style="--map-bg: url('wujiaochang-map.png')"></div>
           <ul class="rank-list" id="riskRank"></ul>
         </div>
       </div>
+      <div class="panel span-8">
+        <div class="panel-title"><h2>月度警情变化与预测</h2><span class="hint">实际值 / 4期移动平均 / 指数平滑</span></div>
+        <div id="trendChart" class="chart chart-tall"></div>
+      </div>
       <div class="panel span-4">
-        <div class="panel-title"><h2>研判结论</h2><span class="hint">自动生成</span></div>
+        <div class="panel-title"><h2>区域警情排名</h2><span class="hint">历史累计</span></div>
+        <div id="areaChart" class="chart chart-tall"></div>
+      </div>
+      <div class="panel span-6">
+        <div class="panel-title"><h2>警情类型结构</h2><span class="hint">累计占比</span></div>
+        <div id="typeChart" class="chart chart-tall"></div>
+      </div>
+      <div class="panel span-6">
+        <div class="panel-title"><h2>区域-类型热力图</h2><span class="hint">颜色越深数量越高</span></div>
+        <div id="heatmapChart" class="chart chart-tall"></div>
+      </div>
+      <div class="panel span-12">
+        <div class="panel-title"><h2>研判结论</h2></div>
         <p class="analysis" id="analysisText"></p>
       </div>
     </section>
@@ -538,29 +560,19 @@
     };
 
     const charts = {};
+    let dashboardData = null;
 
     fetch('dashboard_data.json')
       .then(response => response.json())
       .then(data => initDashboard(data));
 
     function initDashboard(data) {
-      document.getElementById('totalIncidents').textContent = data.summary.total_incidents.toLocaleString();
-      document.getElementById('highRiskCount').textContent = data.summary.high_risk_count.toLocaleString();
-      document.getElementById('areaCount').textContent = data.summary.area_count;
-      document.getElementById('forecastRange').textContent = '2027.12';
-
+      dashboardData = data;
       fillSelect('yearFilter', ['全部'].concat(data.filters.years));
       fillSelect('areaFilter', ['全部'].concat(data.filters.areas));
       fillSelect('typeFilter', ['全部'].concat(data.filters.incident_types));
-
-      renderTrend(data.forecast_series);
-      renderType(data.type_total);
-      renderArea(data.area_total);
-      renderHeatmap(data.heatmap, data.filters.areas, data.filters.incident_types);
-      renderPointMap(data.map_points);
-      renderRiskRank(data.area_risk_avg);
-      renderAnalysis(data);
-
+      ['yearFilter', 'areaFilter', 'typeFilter'].forEach(id => document.getElementById(id).addEventListener('change', updateDashboard));
+      updateDashboard();
       window.addEventListener('resize', () => Object.values(charts).forEach(chart => chart.resize()));
     }
 
@@ -569,41 +581,75 @@
       select.innerHTML = values.map(value => `<option value="${value}">${value}</option>`).join('');
     }
 
+    function updateDashboard() {
+      const filters = currentFilters();
+      const rows = dashboardData.detail_rows.filter(row => matchFilters(row, filters));
+      const aggregate = buildAggregate(rows, filters);
+
+      document.getElementById('totalIncidents').textContent = rows.length.toLocaleString();
+      document.getElementById('highRiskCount').textContent = rows.filter(row => row.risk_level === '高').length.toLocaleString();
+      document.getElementById('areaCount').textContent = new Set(rows.map(row => row.area)).size;
+      document.getElementById('forecastRange').textContent = filters.year === '全部' || filters.year === '2026' || filters.year === '2027' ? '2027.12' : '-';
+
+      renderTrend(aggregate.trendRows);
+      renderType(aggregate.typeTotal);
+      renderArea(aggregate.areaTotal);
+      renderHeatmap(aggregate.heatmap, aggregate.areas, aggregate.types);
+      renderPointMap(aggregate.mapPoints);
+      renderRiskRank(aggregate.areaRiskAvg);
+      renderAnalysis(dashboardData, aggregate, filters);
+    }
+
+    function currentFilters() {
+      return {
+        year: document.getElementById('yearFilter').value,
+        area: document.getElementById('areaFilter').value,
+        type: document.getElementById('typeFilter').value
+      };
+    }
+
+    function matchFilters(row, filters) {
+      return (filters.year === '全部' || String(row.year) === filters.year)
+        && (filters.area === '全部' || row.area === filters.area)
+        && (filters.type === '全部' || row.incident_type === filters.type);
+    }
+
     function renderTrend(rows) {
-      charts.trend = echarts.init(document.getElementById('trendChart'));
+      charts.trend = charts.trend || echarts.init(document.getElementById('trendChart'));
       const months = rows.map(row => row.year_month);
       charts.trend.setOption({
         ...chartTheme,
         tooltip: { trigger: 'axis' },
-        legend: { data: ['实际警情', '4期移动平均', '指数平滑预测'] },
+        legend: { data: ['实际警情', '4期移动平均', '指数平滑预测'], textStyle: { color: '#dbe9ff', fontWeight: 600 } },
         xAxis: { ...chartTheme.xAxis, type: 'category', data: months },
         yAxis: { ...chartTheme.yAxis, type: 'value' },
         dataZoom: [{ type: 'inside', start: 60, end: 100 }, { start: 60, end: 100 }],
         series: [
-          { name: '实际警情', type: 'line', smooth: true, symbolSize: 5, data: rows.map(row => row.actual_count), color: '#3aa5ff' },
-          { name: '4期移动平均', type: 'line', smooth: true, symbolSize: 0, data: rows.map(row => row.moving_average_4m), color: '#35d4d8' },
-          { name: '指数平滑预测', type: 'line', smooth: true, symbolSize: 0, data: rows.map(row => row.exponential_smoothing_0_3), color: '#ffb15c' }
+          { name: '实际警情', type: 'line', smooth: true, symbolSize: 6, lineStyle: { width: 3 }, data: rows.map(row => row.actual_count), color: '#f6e05e' },
+          { name: '4期移动平均', type: 'line', smooth: true, symbolSize: 0, lineStyle: { width: 3 }, data: rows.map(row => row.moving_average_4m), color: '#22e6a8' },
+          { name: '指数平滑预测', type: 'line', smooth: true, symbolSize: 0, lineStyle: { width: 3, type: 'dashed' }, data: rows.map(row => row.exponential_smoothing_0_3), color: '#ff7a45' }
         ]
       });
     }
 
     function renderType(rows) {
-      charts.type = echarts.init(document.getElementById('typeChart'));
+      charts.type = charts.type || echarts.init(document.getElementById('typeChart'));
       charts.type.setOption({
         tooltip: { trigger: 'item' },
-        legend: { bottom: 0, textStyle: { color: '#9fb5d5' } },
+        legend: { type: 'scroll', orient: 'vertical', right: 0, top: 28, bottom: 8, width: 115, textStyle: { color: '#c7d8f2', fontSize: 11 } },
         series: [{
           type: 'pie',
-          radius: ['42%', '68%'],
-          center: ['50%', '43%'],
-          data: rows.slice(0, 8).map(item => ({ name: item[0], value: item[1] })),
-          label: { color: '#dce9ff' }
+          radius: ['34%', '58%'],
+          center: ['33%', '52%'],
+          data: rows.length ? rows.slice(0, 8).map(item => ({ name: item[0], value: item[1] })) : [{ name: '无数据', value: 0 }],
+          label: { color: '#eaf2ff', fontSize: 11, formatter: params => params.name.length > 5 ? params.name.slice(0, 5) + '…' : params.name },
+          labelLine: { length: 8, length2: 6 }
         }]
       });
     }
 
     function renderArea(rows) {
-      charts.area = echarts.init(document.getElementById('areaChart'));
+      charts.area = charts.area || echarts.init(document.getElementById('areaChart'));
       charts.area.setOption({
         ...chartTheme,
         tooltip: { trigger: 'axis' },
@@ -614,12 +660,13 @@
     }
 
     function renderHeatmap(rows, areas, types) {
-      charts.heatmap = echarts.init(document.getElementById('heatmapChart'));
-      const maxValue = Math.max.apply(null, rows.map(row => row.count));
-      const heatData = rows.map(row => [types.indexOf(row.incident_type), areas.indexOf(row.area), row.count]);
+      charts.heatmap = charts.heatmap || echarts.init(document.getElementById('heatmapChart'));
+      const safeRows = rows.length ? rows : [{ area: areas[0] || '', incident_type: types[0] || '', count: 0 }];
+      const maxValue = Math.max.apply(null, safeRows.map(row => row.count)) || 1;
+      const heatData = safeRows.map(row => [types.indexOf(row.incident_type), areas.indexOf(row.area), row.count]);
       charts.heatmap.setOption({
         tooltip: { position: 'top', formatter: params => `${types[params.value[0]]}<br>${areas[params.value[1]]}：${params.value[2]} 起` },
-        grid: { left: 95, right: 30, top: 20, bottom: 90 },
+        grid: { left: 90, right: 18, top: 42, bottom: 42 },
         xAxis: { type: 'category', data: types, axisLabel: { color: '#9fb5d5', rotate: 45 } },
         yAxis: { type: 'category', data: areas, axisLabel: { color: '#9fb5d5' } },
         visualMap: { min: 0, max: maxValue, calculable: true, orient: 'horizontal', left: 'center', bottom: 0, textStyle: { color: '#9fb5d5' }, inRange: { color: ['#163250', '#2478b8', '#35d4d8', '#ffb15c'] } },
@@ -629,7 +676,7 @@
 
     function renderPointMap(points) {
       const map = document.getElementById('pointMap');
-      const max = Math.max.apply(null, points.map(point => point.value));
+      const max = Math.max.apply(null, points.map(point => point.value)) || 1;
       const minLng = 121.49, maxLng = 121.56, minLat = 31.28, maxLat = 31.32;
       map.innerHTML = points.map(point => {
         const left = 8 + ((point.lng - minLng) / (maxLng - minLng)) * 84;
@@ -649,11 +696,60 @@
       document.getElementById('riskRank').innerHTML = rows.slice(0, 8).map((item, index) => `<li><span>${index + 1}. <b>${item[0]}</b></span><span>${item[3]}风险 ${item[1]}分</span></li>`).join('');
     }
 
-    function renderAnalysis(data) {
-      const topArea = data.area_total[0][0];
-      const topType = data.type_total[0][0];
-      const highRisk = data.summary.high_risk_count;
-      document.getElementById('analysisText').innerHTML = `从历史数据看，${topArea}警情总量最高，说明商圈与高校交汇区域仍是巡逻防控重点。${topType}占比较高，应结合开学季、毕业季和商圈活动开展针对性宣传与治理。高风险警情累计 ${highRisk.toLocaleString()} 起，建议在夜间和人员流动高峰期加强重点区域巡查。预测结果显示 2026 年下半年至 2027 年警情规模整体保持上行趋势，可作为警力配置和校园安全预警参考。`;
+    function renderAnalysis(data, aggregate, filters) {
+      const topArea = aggregate.areaTotal.length ? aggregate.areaTotal[0][0] : '当前筛选范围';
+      const topType = aggregate.typeTotal.length ? aggregate.typeTotal[0][0] : '当前警情类型';
+      const highRisk = aggregate.rows.filter(row => row.risk_level === '高').length;
+      const forecastJuly = data.forecast_series.find(row => row.year_month === '2026-07');
+      const forecastAugust = data.forecast_series.find(row => row.year_month === '2026-08');
+      const julyValue = forecastJuly ? Math.round(forecastJuly.exponential_smoothing_0_3) : '-';
+      const augustValue = forecastAugust ? Math.round(forecastAugust.exponential_smoothing_0_3) : '-';
+      const filterText = [filters.year, filters.area, filters.type].filter(value => value !== '全部').join('、') || '全部区域与类型';
+      document.getElementById('analysisText').innerHTML = `当前筛选范围为 ${filterText}，共匹配 ${aggregate.rows.length.toLocaleString()} 起历史警情，其中高风险警情 ${highRisk.toLocaleString()} 起。${topArea}警情数量较高，${topType}是需要重点关注的类型。预测结果显示，2026 年 7 月警情预测约为 ${julyValue} 起，8 月约为 ${augustValue} 起。暑期到来后，高校在校学生数量减少，校园内部人流和一般性校园警情可能下降；但五角场商圈受购物、餐饮、娱乐和暑期出行影响，人流可能上升，应提高该区域警力储备、现场监控密度和风险预测能力，重点关注财物遗失、交通拥堵、人员求助和夜间异常聚集等警情。整体看，2026 年下半年至 2027 年警情规模仍呈上行趋势，可作为警力配置和校园安全预警参考。`;
+    }
+
+    function buildAggregate(rows, filters) {
+      const monthBucket = {}, areaBucket = {}, typeBucket = {}, heatBucket = {}, mapBucket = {}, riskBucket = {};
+      rows.forEach(row => {
+        monthBucket[row.year_month] = (monthBucket[row.year_month] || 0) + 1;
+        areaBucket[row.area] = (areaBucket[row.area] || 0) + 1;
+        typeBucket[row.incident_type] = (typeBucket[row.incident_type] || 0) + 1;
+        heatBucket[row.area + '|' + row.incident_type] = (heatBucket[row.area + '|' + row.incident_type] || 0) + 1;
+        if (!mapBucket[row.area]) {
+          mapBucket[row.area] = { name: row.area, lng: row.lng, lat: row.lat, value: 0, risk_level: row.area_risk_level, risk_score: row.area_avg_risk_score };
+        }
+        mapBucket[row.area].value += 1;
+        if (!riskBucket[row.area]) {
+          riskBucket[row.area] = { area: row.area, score: row.area_avg_risk_score, count: 0, level: row.area_risk_level };
+        }
+        riskBucket[row.area].count += 1;
+      });
+
+      let trendRows;
+      if (filters.area === '全部' && filters.type === '全部' && (filters.year === '全部' || filters.year === '2026' || filters.year === '2027')) {
+        trendRows = dashboardData.forecast_series.filter(row => filters.year === '全部' || row.year_month.indexOf(filters.year + '-') === 0);
+      } else {
+        trendRows = Object.keys(monthBucket).sort().map(month => ({ year_month: month, actual_count: monthBucket[month], moving_average_4m: null, exponential_smoothing_0_3: null }));
+      }
+
+      const areas = (filters.area === '全部' ? dashboardData.filters.areas : [filters.area]).filter(Boolean);
+      const types = (filters.type === '全部' ? dashboardData.filters.incident_types : [filters.type]).filter(Boolean);
+      const heatmap = Object.keys(heatBucket).map(key => {
+        const parts = key.split('|');
+        return { area: parts[0], incident_type: parts[1], count: heatBucket[key] };
+      });
+
+      return {
+        rows,
+        trendRows,
+        areaTotal: Object.keys(areaBucket).map(key => [key, areaBucket[key]]).sort((a, b) => b[1] - a[1]),
+        typeTotal: Object.keys(typeBucket).map(key => [key, typeBucket[key]]).sort((a, b) => b[1] - a[1]),
+        heatmap,
+        areas,
+        types,
+        mapPoints: Object.keys(mapBucket).map(key => mapBucket[key]),
+        areaRiskAvg: Object.keys(riskBucket).map(key => [riskBucket[key].area, riskBucket[key].score, riskBucket[key].count, riskBucket[key].level]).sort((a, b) => b[1] - a[1])
+      };
     }
   </script>
 <!-- hexo injector body_end start --><script>window.toggleHistory = function(btn) {
@@ -675,7 +771,7 @@
           </div>
           <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/bug/"><span class="card-category-list-name">bug</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/ctf/"><span class="card-category-list-name">ctf</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">学习</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/"><span class="card-category-list-name">数学</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E8%AE%BA/"><span class="card-category-list-name">数论</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/"><span class="card-category-list-name">电子取证</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"><span class="card-category-list-name">线性代数</span><span class="card-category-list-count">2</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%9F%A9%E9%98%B5/"><span class="card-category-list-name">矩阵</span><span class="card-category-list-count">2</span></a></li></ul></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/matrix/" style="font-size: 1.3em; color: #99a1ac">matrix</a> <a href="/tags/%E6%AF%94%E8%B5%9Bwp/" style="font-size: 1.1em; color: #999">比赛wp</a> <a href="/tags/digital-forensics/" style="font-size: 1.1em; color: #999">digital forensics</a> <a href="/tags/%E7%94%B5%E8%84%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 1.1em; color: #999">电脑问题解决</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">数学</a> <a href="/tags/%E9%9B%86%E7%BE%A4/" style="font-size: 1.1em; color: #999">集群</a> <a href="/tags/letex/" style="font-size: 1.1em; color: #999">letex</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.5em; color: #99a9bf">数论</a> <a href="/tags/crypto/" style="font-size: 1.1em; color: #999">crypto</a></div></div><div class="card-widget card-archives">
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/digital-forensics/" style="font-size: 1.1em; color: #999">digital forensics</a> <a href="/tags/%E6%AF%94%E8%B5%9Bwp/" style="font-size: 1.1em; color: #999">比赛wp</a> <a href="/tags/%E7%94%B5%E8%84%91%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 1.1em; color: #999">电脑问题解决</a> <a href="/tags/crypto/" style="font-size: 1.1em; color: #999">crypto</a> <a href="/tags/%E9%9B%86%E7%BE%A4/" style="font-size: 1.1em; color: #999">集群</a> <a href="/tags/letex/" style="font-size: 1.1em; color: #999">letex</a> <a href="/tags/matrix/" style="font-size: 1.3em; color: #99a1ac">matrix</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">数学</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.5em; color: #99a9bf">数论</a></div></div><div class="card-widget card-archives">
     <div class="item-headline">
       <i class="fas fa-archive"></i>
       <span>Archives</span>
@@ -730,7 +826,7 @@
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">19</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-21T06:44:47.392Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By fragrant veget.</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional and Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">19</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-21T08:16:05.318Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By fragrant veget.</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional and Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="/js/tw_cn.js?v=5.5.3"></script><div class="js-pjax"><script>(() => {
   const loadMathjax = () => {
     if (!window.MathJax) {
       window.MathJax = {
